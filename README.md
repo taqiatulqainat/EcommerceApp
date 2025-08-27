@@ -113,7 +113,17 @@ Now if you go to http://localhost:5000
  → you’ll see:
 Backend is working 🚀}
 
+. <br> . <br> . <br> . <br>
 
+# AUTHENTICATION PAGES (SignUp + LogIn)
 
+=> FRONTEND
+1. make pages folder in client/src.
+2. make SignUp.js and Login.js file in pages.
+3. Write codes in both files (from gpt)
+4. Install React Router:
+//cd client
+//npm install react-router-dom
+6. Make some changings in client/src/App.js file (from gpt).
 
 
