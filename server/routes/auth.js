@@ -26,23 +26,48 @@ router.post("/signup", async (req, res) => {
   }
 });
 
-// Login Route
+// // Login Route
+// router.post("/login", async (req, res) => {
+//   try {
+//     const { email, password } = req.body;
+
+//     // Find user
+//     const user = await User.findOne({ email });
+//     if (!user) return res.status(400).json({ message: "User not found" });
+
+//     // Compare password
+//     const isMatch = await bcrypt.compare(password, user.password);
+//     if (!isMatch) return res.status(400).json({ message: "Invalid password" });
+
+//     // Create JWT
+//     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1d" });
+
+//     res.json({ token, user: { id: user._id, name: user.name, email: user.email } });
+//   } catch (err) {
+//     res.status(500).json({ message: err.message });
+//   }
+// });
+
 router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    // Find user
+    // 1) find user
     const user = await User.findOne({ email });
     if (!user) return res.status(400).json({ message: "User not found" });
 
-    // Compare password
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(400).json({ message: "Invalid password" });
+    // 2) verify password
+    const match = await bcrypt.compare(password, user.password);
+    if (!match) return res.status(400).json({ message: "Invalid credentials" });
 
-    // Create JWT
+    // 3) issue JWT
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1d" });
 
-    res.json({ token, user: { id: user._id, name: user.name, email: user.email } });
+    // 4) respond (token + minimal profile)
+    res.json({
+      token,
+      user: { id: user._id, name: user.name, email: user.email }
+    });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
