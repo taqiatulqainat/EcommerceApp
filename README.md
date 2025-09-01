@@ -127,3 +127,16 @@ Backend is working 🚀}
 6. Make some changings in client/src/App.js file (from gpt).
 
 
+=> BACKEND
+1. Create User Model<br>
+Inside your backend (server/) folder, create a folder called models and a file User.js
+2. Create Auth Routes<br>
+Inside server/, create routes folder and auth.js
+3. Connect Routes in server.js<br>
+Update server.js
+4. Connect React Forms to Backend<br>
+Install axios in frontend to make HTTP requests:
+//cd client
+//npm install axios
+5. Update signup and login pages (from gpt)
+
